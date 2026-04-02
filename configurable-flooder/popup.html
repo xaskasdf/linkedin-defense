@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 420px;
+      padding: 16px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+    h2 {
+      margin: 0 0 12px 0;
+      font-size: 15px;
+      color: #ff6b6b;
+    }
+    .section {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    textarea {
+      width: 100%;
+      height: 140px;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 8px;
+      font-family: "Cascadia Code", "Fira Code", monospace;
+      font-size: 12px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    input[type="number"] {
+      width: 80px;
+      background: #111;
+      color: #e0e0e0;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    .row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .row > div { flex: 1; }
+    button {
+      background: #ff6b6b;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      font-size: 13px;
+    }
+    button:hover { background: #ff4444; }
+    .hint {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .stats {
+      background: #111;
+      border-radius: 4px;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #0f0;
+      margin-bottom: 12px;
+    }
+    #status {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+  <h2>BrowserGate Flooder</h2>
+
+  <div class="section">
+    <label>Payloads personalizados (uno por linea)</label>
+    <textarea id="payloads" placeholder="Pega aqui tus extension IDs falsos, strings, o lo que quieras inyectar en los eventos.
+
+Formato libre — un payload por linea. Ejemplos:
+
+aaaabbbbccccddddeeeeffffgggghhhh
+extension-falsa-de-prueba-12345678
+mi-payload-personalizado-audit-test
+
+Si esta vacio, se generan IDs aleatorios automaticamente."></textarea>
+    <div class="hint">Cada linea se usara como un extension ID falso en los eventos enviados a LinkedIn. Puedes cargar desde un .txt con el boton de abajo.</div>
+  </div>
+
+  <div class="section">
+    <input type="file" id="fileInput" accept=".txt,.csv,.json" style="display:none">
+    <button id="loadFile" style="background:#333;color:#e0e0e0;margin-bottom:8px;">Cargar desde archivo .txt</button>
+  </div>
+
+  <div class="row">
+    <div>
+      <label>Payloads por burst</label>
+      <input type="number" id="batchSize" value="50" min="1" max="500">
+    </div>
+    <div>
+      <label>Multiplicador</label>
+      <input type="number" id="multiplier" value="5" min="1" max="20">
+    </div>
+    <div>
+      <label>Intervalo (seg)</label>
+      <input type="number" id="interval" value="45" min="5" max="300">
+    </div>
+  </div>
+
+  <button id="save">Guardar y aplicar</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

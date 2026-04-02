@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn Extension Scan Blocker",
+  "version": "1.0.0",
+  "description": "Blocks LinkedIn's covert extension fingerprinting (BrowserGate)",
+  "permissions": ["declarativeNetRequest"],
+  "host_permissions": ["*://*.linkedin.com/*"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "block_linkedin_tracking",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.linkedin.com/*"],
+      "js": ["blocker.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}

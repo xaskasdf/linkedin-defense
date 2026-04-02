@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn BrowserGate Configurable Flooder",
+  "version": "1.0.0",
+  "description": "Blocks LinkedIn extension scanning and floods telemetry with configurable fake data",
+  "permissions": ["declarativeNetRequest", "storage"],
+  "host_permissions": ["*://*.linkedin.com/*"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "block_linkedin_tracking",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.linkedin.com/*"],
+      "js": ["flooder.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://*.linkedin.com/*"],
+      "js": ["config-bridge.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
