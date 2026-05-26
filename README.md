@@ -1,4 +1,4 @@
-# LinkedIn Extension Scan Defense Kit
+# LinkedIn's Browsergate Extension Scan Defense Kit
 
 <details>
 <summary><b>English</b></summary>
